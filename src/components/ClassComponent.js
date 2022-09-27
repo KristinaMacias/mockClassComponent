@@ -24,16 +24,24 @@ class ClassComponent extends React.Component {
         this.setState({ [event.target.name]: event.target.value });
     }
 
-    //method to post data to the API
+    //post method to add a comment
     handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.target);
         fetch("https://6298beb2f2decf5bb74a9edb.mockapi.io/comments", {
             method: "POST",
-            body: data,
-        });
-        this.componentDidMount()
-    };
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: this.state.name,
+                comment: this.state.comment
+            })
+        })
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ list: [...this.state.list, data] });
+            });
+    }
 
 
 
