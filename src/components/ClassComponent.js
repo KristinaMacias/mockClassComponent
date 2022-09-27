@@ -41,8 +41,8 @@ class ClassComponent extends React.Component {
             .then(data => {
                 this.setState({ list: [...this.state.list, data] });
             });
+        this.componentDidMount()
     }
-
 
 
 
